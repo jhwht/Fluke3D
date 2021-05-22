@@ -57,6 +57,14 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Fire"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""99431232-d303-4a23-9e76-f422eb717d50"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -158,6 +166,17 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""action"": ""Sprint"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3616d50f-b1bd-4c05-ab72-d555bd995fc7"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Fire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -171,6 +190,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_GroundMovement_MouseX = m_GroundMovement.FindAction("MouseX", throwIfNotFound: true);
         m_GroundMovement_MouseY = m_GroundMovement.FindAction("MouseY", throwIfNotFound: true);
         m_GroundMovement_Sprint = m_GroundMovement.FindAction("Sprint", throwIfNotFound: true);
+        m_GroundMovement_Fire = m_GroundMovement.FindAction("Fire", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -225,6 +245,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private readonly InputAction m_GroundMovement_MouseX;
     private readonly InputAction m_GroundMovement_MouseY;
     private readonly InputAction m_GroundMovement_Sprint;
+    private readonly InputAction m_GroundMovement_Fire;
     public struct GroundMovementActions
     {
         private @PlayerControls m_Wrapper;
@@ -234,6 +255,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         public InputAction @MouseX => m_Wrapper.m_GroundMovement_MouseX;
         public InputAction @MouseY => m_Wrapper.m_GroundMovement_MouseY;
         public InputAction @Sprint => m_Wrapper.m_GroundMovement_Sprint;
+        public InputAction @Fire => m_Wrapper.m_GroundMovement_Fire;
         public InputActionMap Get() { return m_Wrapper.m_GroundMovement; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -258,6 +280,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Sprint.started -= m_Wrapper.m_GroundMovementActionsCallbackInterface.OnSprint;
                 @Sprint.performed -= m_Wrapper.m_GroundMovementActionsCallbackInterface.OnSprint;
                 @Sprint.canceled -= m_Wrapper.m_GroundMovementActionsCallbackInterface.OnSprint;
+                @Fire.started -= m_Wrapper.m_GroundMovementActionsCallbackInterface.OnFire;
+                @Fire.performed -= m_Wrapper.m_GroundMovementActionsCallbackInterface.OnFire;
+                @Fire.canceled -= m_Wrapper.m_GroundMovementActionsCallbackInterface.OnFire;
             }
             m_Wrapper.m_GroundMovementActionsCallbackInterface = instance;
             if (instance != null)
@@ -277,6 +302,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Sprint.started += instance.OnSprint;
                 @Sprint.performed += instance.OnSprint;
                 @Sprint.canceled += instance.OnSprint;
+                @Fire.started += instance.OnFire;
+                @Fire.performed += instance.OnFire;
+                @Fire.canceled += instance.OnFire;
             }
         }
     }
@@ -288,5 +316,6 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         void OnMouseX(InputAction.CallbackContext context);
         void OnMouseY(InputAction.CallbackContext context);
         void OnSprint(InputAction.CallbackContext context);
+        void OnFire(InputAction.CallbackContext context);
     }
 }

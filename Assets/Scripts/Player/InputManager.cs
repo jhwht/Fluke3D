@@ -7,6 +7,7 @@ public class InputManager : MonoBehaviour
 {
     [SerializeField] private Movement _movement;
     [SerializeField] private MouseLook _mouseLook;
+    [SerializeField] private WeaponController _weapon;
 
     private PlayerControls _controls;
     private PlayerControls.GroundMovementActions _groundMovement;
@@ -28,6 +29,8 @@ public class InputManager : MonoBehaviour
         _groundMovement.MouseX.performed += ctx => _mouseInput.x = ctx.ReadValue<float>();
         _groundMovement.MouseY.performed += ctx => _mouseInput.y = ctx.ReadValue<float>();
         _groundMovement.Sprint.performed += ctx => _movement.OnSprintPressed(ctx.ReadValueAsButton());
+        _groundMovement.Fire.performed += ctx => _weapon.OnFirePressed(ctx.ReadValueAsButton());
+
     }
 
     private void Update()
