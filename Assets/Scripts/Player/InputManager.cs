@@ -17,6 +17,8 @@ public class InputManager : MonoBehaviour
     private void Awake()
     {
         Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        
         _controls = new PlayerControls();
         _groundMovement = _controls.GroundMovement;
 
@@ -25,6 +27,7 @@ public class InputManager : MonoBehaviour
         _groundMovement.Jump.performed += _ => _movement.OnJumpPressed();
         _groundMovement.MouseX.performed += ctx => _mouseInput.x = ctx.ReadValue<float>();
         _groundMovement.MouseY.performed += ctx => _mouseInput.y = ctx.ReadValue<float>();
+        _groundMovement.Sprint.performed += ctx => _movement.OnSprintPressed(ctx.ReadValueAsButton());
     }
 
     private void Update()

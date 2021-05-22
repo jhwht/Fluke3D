@@ -8,6 +8,7 @@ public class Movement : MonoBehaviour
 {
     [SerializeField] private CharacterController _controller;
     [SerializeField] private float _speed = 11f;
+    [SerializeField] private float _sprintMultiplier = 1.4f;
     [SerializeField] private float _gravity = -9.81f;
     [SerializeField] private float _jumpStrength = 3.5f;
     [SerializeField] private LayerMask _groundMask;
@@ -16,6 +17,7 @@ public class Movement : MonoBehaviour
     private Vector3 _verticalVelocity = Vector3.zero;
     private bool _isGrounded;
     private bool _isJumping;
+    private bool _isSprinting;
 
     private void Update()
     {
@@ -28,12 +30,22 @@ public class Movement : MonoBehaviour
         //Horizontal Movement
         var horizontalVelocity =
             (transform.right * _horizontalInput.x + transform.forward * _horizontalInput.y) * _speed;
+
+        if (_isSprinting)
+        {
+            horizontalVelocity *= _sprintMultiplier;
+        }
+
         _controller.Move(horizontalVelocity * Time.deltaTime);
 
         //Jump
-        if (_isJumping && _isGrounded)
+        if (_isJumping)
         {
-            _verticalVelocity.y = Mathf.Sqrt(-2f * _jumpStrength * _gravity);
+            if (_isGrounded)
+            {
+                _verticalVelocity.y = Mathf.Sqrt(-2f * _jumpStrength * _gravity);
+            }
+
             _isJumping = false;
         }
 
@@ -50,5 +62,10 @@ public class Movement : MonoBehaviour
     public void OnJumpPressed()
     {
         _isJumping = true;
+    }
+
+    public void OnSprintPressed(bool value)
+    {
+        _isSprinting = value;
     }
 }
