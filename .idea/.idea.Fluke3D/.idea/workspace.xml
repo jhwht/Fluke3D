@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1d4b56a7-8f2b-42b9-848b-41f4efe29143" name="Default Changelist" comment="" />
+    <list default="true" id="1d4b56a7-8f2b-42b9-848b-41f4efe29143" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/TestingHall.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/TestingHall.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.probuilder/Settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.probuilder/Settings.json" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -49,7 +52,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1621668726277</updated>
-      <workItem from="1621668734442" duration="665000" />
+      <workItem from="1621668734442" duration="1052000" />
     </task>
     <servers />
   </component>
